@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}Your Cart - Rida & Bloom{% endblock %}
+
+{% block content %}
+<section class="cart-section">
+  <h1 class="section-title">Your Shopping Cart</h1>
+
+  {% if cart and cart|length > 0 %}
+  <table class="cart-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart %}
+      <tr>
+        <td>
+          <img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}" class="cart-img">
+          <span>{{ item.name }}</span>
+        </td>
+        <td>₹{{ item.price }}</td>
+        <td>
+          <a href="{{ url_for('remove_from_cart', product_id=item.id) }}" class="remove-btn">×</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="cart-actions">
+    <a href="{{ url_for('checkout') }}" class="btn checkout-btn">Proceed to Checkout</a>
+  </div>
+
+  {% else %}
+  <p class="empty-text">Your cart is empty</p>
+  {% endif %}
+</section>
+
+<style>
+.cart-section {
+  padding: 3rem 2rem;
+  background-color: #fff8f5;
+  text-align: center;
+}
+
+.section-title {
+  font-family: 'Dancing Script', cursive;
+  color: #d581dc;
+  font-size: 2.3rem;
+  margin-bottom: 1rem;
+}
+
+.cart-table {
+  width: 90%;
+  max-width: 900px;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  background: #fff0f5;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(240, 138, 93, 0.15);
+}
+
+.cart-table th,
+.cart-table td {
+  padding: 1rem;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #444;
+  border-bottom: 1px solid #fcd5ce;
+}
+
+.cart-table th {
+  background-color: #f8e1e7;
+  color: #d581dc;
+}
+
+.cart-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.remove-btn {
+  color: #fff;
+  background-color: #d581dc;
+  border-radius: 50%;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  line-height: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.remove-btn:hover {
+  background-color: #f08a5d;
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 0 10px #f9c5bd;
+}
+
+.checkout-btn {
+  background-color: #f08a5d;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+.checkout-btn:hover {
+  background-color: #d581dc;
+}
+
+.empty-text {
+  font-size: 1.1rem;
+  color: #999;
+  margin-top: 2rem;
+}
+</style>
+{% endblock %}

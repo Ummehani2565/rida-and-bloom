@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Order Confirmed - Rida & Bloom{% endblock %}
+
+{% block content %}
+<section class="confirmation">
+  <div class="confirmation-card">
+    <i class="fa-solid fa-heart-circle-check"></i>
+    <h1>Order Confirmed 💝</h1>
+    <p>Thank you for choosing Rida & Bloom! Your order is being lovingly prepared and will reach you soon 🌷</p>
+    <a href="{{ url_for('home') }}" class="btn">Back to Home</a>
+  </div>
+</section>
+
+<style>
+.confirmation {
+  min-height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff0f7, #ffddee);
+}
+.confirmation-card {
+  text-align: center;
+  background: white;
+  border-radius: 30px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(213,129,220,0.25);
+  animation: fadeUp 1.2s ease-in-out;
+}
+.confirmation-card i {
+  font-size: 3rem;
+  color: #d581dc;
+  margin-bottom: 1rem;
+}
+.confirmation-card h1 {
+  font-family: 'Dancing Script', cursive;
+  color: #d26edc;
+  font-size: 2.5rem;
+}
+.confirmation-card p {
+  font-family: 'Poppins', sans-serif;
+  color: #555;
+  max-width: 400px;
+  margin: 1rem auto 2rem;
+  line-height: 1.6;
+}
+.btn {
+  background: linear-gradient(135deg, #f08a5d, #d581dc);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  transition: 0.3s;
+}
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(240,138,93,0.3);
+}
+@keyframes fadeUp {
+  from {opacity: 0; transform: translateY(40px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+</style>
+{% endblock %}

@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+{% block title %}Contact - Rida & Bloom{% endblock %}
+
+{% block content %}
+<section class="contact-section">
+  <h1 class="section-title">Get in Touch ☺</h1>
+  <p class="section-subtitle">We’d love to hear from you! Any inquiries, feedback, or sweet words are always welcome.</p>
+
+  <!-- 🌸 Floating Flash Message -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="toast-container">
+        {% for category, message in messages %}
+          <div class="toast {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- 💌 Contact Form -->
+  <form action="{{ url_for('contact') }}" method="post" class="contact-form">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit" class="btn submit-btn">Send Message</button>
+  </form>
+
+  <!-- 🌷 Contact Info -->
+  <div class="contact-info">
+    <div class="info-card">
+      <i class="fa-solid fa-location-dot"></i>
+      <h3>Our Address</h3>
+      <p>Rida & Bloom Studio<br>Rosewood Lane, Juhu, Mumbai - 400049</p>
+    </div>
+
+    <div class="info-card">
+      <i class="fa-solid fa-phone"></i>
+      <h3>Call Us</h3>
+      <p>
+        <a href="tel:+919876543210">+91 98765 43210</a><br>
+        <a href="tel:+919123456789">+91 91234 56789</a>
+      </p>
+    </div>
+
+    <div class="info-card">
+      <i class="fa-solid fa-envelope"></i>
+      <h3>Email</h3>
+      <p>
+        <a href="mailto:hello@ridaandbloom.com">hello@ridaandbloom.com</a><br>
+        <a href="mailto:support@ridaandbloom.com">support@ridaandbloom.com</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== TOAST MESSAGE ===== */
+.toast-container {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.toast {
+  background: linear-gradient(135deg, #ffe6f0, #fcd6eb);
+  color: #d36bae;
+  font-family: 'Poppins', sans-serif;
+  padding: 1rem 1.5rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(240,138,153,0.25);
+  margin-top: 0.5rem;
+  font-weight: 500;
+  animation: slideIn 0.6s ease-out, fadeOut 0.8s ease-in 4s forwards;
+  min-width: 280px;
+  text-align: center;
+}
+
+/* Slide + Fade Animations */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(40px) translateY(10px); }
+  to { opacity: 1; transform: translateX(0) translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(60px); }
+}
+
+/* ===== CONTACT SECTION ===== */
+.contact-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #fff0f7, #ffe5ef);
+  padding: 3.5rem 1rem 5rem;
+  text-align: center;
+  animation: fadeUp 1s ease-in-out;
+}
+
+/* Titles */
+.section-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.7rem;
+  color: #d26edc;
+  margin-bottom: 0.8rem;
+}
+
+.section-subtitle {
+  font-family: 'Poppins', sans-serif;
+  color: #666;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+/* ===== CONTACT FORM ===== */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 370px;
+  max-width: 90%;
+  background: linear-gradient(145deg, #fff5fb, #ffe3f2);
+  padding: 2rem;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(240,138,153,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeUp 1.2s ease-in-out;
+}
+
+.contact-form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(213,129,220,0.25);
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.7rem 1rem;
+  border: 1px solid #f08a5d;
+  border-radius: 25px;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  background: rgba(255,255,255,0.9);
+  transition: 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #d581dc;
+  box-shadow: 0 0 8px rgba(213,129,220,0.3);
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #f08a5d, #d581dc);
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #d581dc, #f08a5d);
+  transform: translateY(-3px);
+}
+
+/* ===== CONTACT INFO ===== */
+.contact-info {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  animation: fadeUp 1.5s ease-in-out;
+}
+
+.info-card {
+  background: white;
+  border: 1px solid #ffd4e4;
+  box-shadow: 0 8px 20px rgba(240,138,153,0.15);
+  border-radius: 20px;
+  padding: 1.5rem;
+  width: 260px;
+  transition: 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(213,129,220,0.25);
+}
+
+.info-card i {
+  font-size: 1.8rem;
+  color: #d26edc;
+  margin-bottom: 0.8rem;
+}
+
+.info-card h3 {
+  color: #f08a5d;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.info-card p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.info-card a {
+  color: #d36bae;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.info-card a:hover {
+  color: #f08a5d;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .contact-info {
+    flex-direction: column;
+    align-items: center;
+  }
+  .contact-form {
+    width: 90%;
+  }
+  .toast-container {
+    right: 10px;
+    bottom: 15px;
+  }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Rida & Bloom{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+/* ===== GLOBAL BODY ===== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff8fb;
+  color: #444;
+  overflow-x: hidden;
+}
+
+/* ===== HEADER DESIGN ===== */
+header.main-header {
+  background: linear-gradient(135deg, #fff5fa, #ffe9f2);
+  border-bottom: 2px solid #f5b0d2;
+  box-shadow: 0 4px 12px rgba(240,138,93,0.1);
+  padding: 0.8rem 2rem;
+  position: fixed;
+  width: 97%;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+
+/* ===== LOGO ===== */
+.header-logo h1 {
+  font-family: 'Dancing Script', cursive;
+  color: #d26edc;
+  font-size: 1.8rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ===== SEARCH BAR ===== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50px;
+  padding: 0.4rem 0.8rem;
+  width: 240px;
+  transition: all 0.4s ease;
+  box-shadow: 0 2px 8px rgba(240,138,93,0.1);
+  border: 1px solid transparent;
+}
+.search-bar input {
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  padding: 0.4rem 0.6rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: #555;
+}
+.search-bar button {
+  border: none;
+  background: #d581dc;
+  color: white;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-bar button:hover {
+  background: #c35dd2;
+  transform: rotate(8deg);
+}
+.search-bar:hover,
+.search-bar:focus-within {
+  width: 320px;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(213,129,220,0.25);
+  border-color: #e6a9f0;
+}
+
+/* ===== NAVIGATION ICONS ===== */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+nav a {
+  color: #d26edc;
+  font-size: 1.3rem;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  padding: 0.5rem;
+  box-shadow: 0 3px 10px rgba(213,129,220,0.15);
+}
+
+nav a:hover {
+  color: white;
+  background: #d581dc;
+  transform: scale(1.15);
+  box-shadow: 0 0 15px rgba(240,138,93,0.3);
+}
+
+/* ===== CTA BUTTON ===== */
+.cta-btn {
+  background: linear-gradient(135deg, #e6a9f0, #fcb6da);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  padding: 0.6rem 1.3rem;
+  border-radius: 30px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(240,138,93,0.15);
+  transition: all 0.3s ease;
+}
+.cta-btn:hover {
+  background: linear-gradient(135deg, #d581dc, #f08a5d);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(240,138,93,0.3);
+}
+
+/* ===== FLASH MESSAGE POPUP ===== */
+.flash-message {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #fcb6da, #e6a9f0);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(213, 129, 220, 0.3);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  animation: fadeInOut 4s ease forwards;
+  z-index: 2000;
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(20px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(20px); }
+}
+
+/* ===== MAIN CONTENT ===== */
+main {
+  min-height: 80vh;
+  padding-top: 8rem;
+}
+
+/* ===== FOOTER ===== */
+.pink-footer {
+  background: linear-gradient(135deg, #fff5fa, #ffe9f2);
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #663366;
+  border-top: 2px solid #f8cde7;
+  box-shadow: 0 -4px 10px rgba(245, 190, 220, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+.pink-footer h3 {
+  font-family: 'Dancing Script', cursive;
+  color: #d26edc;
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+}
+.pink-footer p {
+  color: #a65ca8;
+  font-size: 1rem;
+  margin-bottom: 1.3rem;
+}
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.social-icon {
+  background: linear-gradient(135deg, #d191b5, #f6a6d1);
+  color: white;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(240, 138, 180, 0.2);
+}
+.social-icon:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 6px 15px rgba(240, 138, 180, 0.4);
+  background: linear-gradient(135deg, #f7a1d3, #fcd3ec);
+}
+.pink-footer small {
+  display: block;
+  margin-top: 1.5rem;
+  color: #8b588c;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="main-header">
+  <div class="header-container">
+
+    <!-- Logo -->
+    <div class="header-logo">
+      <h1>Rida & Bloom</h1>
+    </div>
+
+    <!-- Search Bar -->
+    <form action="{{ url_for('search') }}" method="GET" class="search-bar">
+      <input type="text" name="query" placeholder="Search" required>
+      <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+
+    <!-- Icon Navigation -->
+    <nav>
+      <a href="{{ url_for('home') }}" title="Home"><i class="fa-solid fa-house"></i></a>
+      <a href="{{ url_for('products') }}" title="Products"><i class="fa-solid fa-bag-shopping"></i></a>
+      <a href="{{ url_for('wishlist') }}" title="Wishlist"><i class="fa-solid fa-heart"></i></a>
+      <a href="{{ url_for('cart') }}" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a>
+      <a href="{{ url_for('about') }}" title="About Us"><i class="fa-solid fa-circle-info"></i></a>
+      <a href="{{ url_for('contact') }}" title="Contact"><i class="fa-solid fa-envelope"></i></a>
+    </nav>
+
+    <!-- CTA Button -->
+    <a href="{{ url_for('register') }}" class="cta-btn">Join Now</a>
+  </div>
+</header>
+
+<!-- FLASH MESSAGE -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash-message">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<!-- MAIN CONTENT -->
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer class="pink-footer">
+  <div class="footer-content">
+    <h3>Rida & Bloom</h3>
+    <p>Grace In Every Fold</p>
+
+    <div class="socials">
+      <a href="https://instagram.com/rida.and.bloom" target="_blank" class="social-icon insta">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="mailto:hello@ridaandbloom.com" class="social-icon email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+      <a href="https://wa.me/911234567890" target="_blank" class="social-icon whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    </div>
+
+    <small>&copy; 2025 <strong>Rida & Bloom</strong>. All rights reserved.<br>Heartcrafted by Ummehani.</small>
+  </div>
+</footer>
+
+</body>
+</html>

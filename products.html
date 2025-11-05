@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% block title %}Products - Rida & Bloom{% endblock %}
+
+{% block content %}
+<section class="products-section">
+  <h1 class="section-title">Our Boutique Collection</h1>
+  <p class="section-subtitle">Discover our handpicked designs customized with love ✨</p>
+
+  <!-- Sorting Dropdown -->
+  <div class="sort-container">
+    <label for="sortSelect">Sort By:</label>
+    <select id="sortSelect" onchange="sortProducts()">
+      <option value="default">Default</option>
+      <option value="az">A → Z</option>
+      <option value="za">Z → A</option>
+      <option value="low-high">Price: Low to High</option>
+      <option value="high-low">Price: High to Low</option>
+    </select>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+    {% for product in products %}
+    <div class="product-card" data-name="{{ product.name }}" data-price="{{ product.price }}">
+      <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+      <h3>{{ product.name }}</h3>
+      <p class="price">₹{{ product.price }}</p>
+
+      <div class="card-buttons">
+        <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn add-cart" onclick="showToast('Added to Cart!')">
+          <i class="fa-solid fa-cart-shopping"></i> Add
+        </a>
+        <a href="{{ url_for('add_to_wishlist', product_id=product.id) }}" class="btn add-wishlist" onclick="showToast('Added to Wishlist!')">
+          <i class="fa-solid fa-heart"></i>
+        </a>
+        <a href="{{ url_for('product_details', product_id=product.id) }}" class="btn view-details">
+          <i class="fa-solid fa-eye"></i>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ===== CSS ===== -->
+<style>
+.products-section {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: linear-gradient(180deg, #fff8fb 0%, #ffe6f0 100%);
+  animation: fadeSlideIn 1.2s ease-in-out;
+}
+
+@keyframes fadeSlideIn {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+  font-family: 'Dancing Script', cursive;
+  color: #d581dc;
+  font-size: 2.6rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(245, 190, 220, 0.5);
+}
+
+.section-subtitle {
+  font-family: 'Poppins', sans-serif;
+  color: #666;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+/* Sorting Dropdown */
+.sort-container {
+  margin-bottom: 2rem;
+  font-family: 'Poppins', sans-serif;
+  color: #741b47;
+}
+.sort-container label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+.sort-container select {
+  padding: 0.4rem 1rem;
+  border: 2px solid #d581dc;
+  border-radius: 20px;
+  background: #fff;
+  font-family: 'Poppins', sans-serif;
+  color: #741b47;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.sort-container select:hover {
+  background: #fff0f7;
+  box-shadow: 0 0 10px rgba(213,129,220,0.3);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 25px;
+  padding: 1rem;
+  width: 90%;
+  max-width: 260px;
+  text-align: center;
+  box-shadow: 0 6px 25px rgba(213, 129, 220, 0.1);
+  transition: all 0.4s ease;
+  opacity: 0;
+  animation: fadeInUp 1.2s ease forwards;
+}
+.product-card:nth-child(odd) { animation-delay: 0.1s; }
+.product-card:nth-child(even) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.product-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 10px 35px rgba(240, 138, 93, 0.25);
+}
+
+.product-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  transition: transform 0.4s ease;
+}
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+.product-card h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  color: #d581dc;
+  margin-bottom: 0.3rem;
+}
+
+.price {
+  color: #f08a5d;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.btn {
+  text-decoration: none;
+  background-color: #cb5cf0;
+  color: #fff;
+  padding: 0.4rem 0.6rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn:hover {
+  background-color: #d581dc;
+  box-shadow: 0 0 10px rgba(213, 129, 220, 0.4);
+}
+
+.add-wishlist {
+  background-color: #d581dc;
+}
+
+.add-wishlist:hover {
+  background-color: #f08a5d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-card img { height: 220px; }
+  .section-title { font-size: 2rem; }
+  .section-subtitle { font-size: 0.9rem; }
+}
+</style>
+
+<!-- ===== JS for Sorting ===== -->
+<script>
+function sortProducts() {
+  const select = document.getElementById("sortSelect");
+  const grid = document.getElementById("productGrid");
+  const cards = Array.from(grid.children);
+
+  let sorted;
+  if (select.value === "az") {
+    sorted = cards.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+  } else if (select.value === "za") {
+    sorted = cards.sort((a, b) => b.dataset.name.localeCompare(a.dataset.name));
+  } else if (select.value === "low-high") {
+    sorted = cards.sort((a, b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price));
+  } else if (select.value === "high-low") {
+    sorted = cards.sort((a, b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price));
+  } else {
+    sorted = cards; // Default order
+  }
+
+  grid.innerHTML = "";
+  sorted.forEach(card => grid.appendChild(card));
+}
+</script>
+{% endblock %}

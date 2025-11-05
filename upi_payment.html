@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}UPI Payment - Rida & Bloom{% endblock %}
+
+{% block content %}
+<section class="upi-section">
+  <h1>📱 Scan & Pay via UPI</h1>
+  <p>Use any UPI app (GPay, Paytm, PhonePe, BHIM) to complete your payment 💖</p>
+  <img src="{{ url_for('static', filename='images/upi_qr.png') }}" alt="UPI QR Code" class="upi-qr">
+
+  <p class="note">Once paid, click below to confirm:</p>
+  <a href="{{ url_for('payment_success') }}" class="btn">I Have Paid 💌</a>
+</section>
+
+<style>
+.upi-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #f8d3e0, #fde2f7);
+  min-height: 80vh;
+}
+.upi-section h1 {
+  font-family: 'Dancing Script', cursive;
+  color: #d76eb8;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.upi-section p {
+  font-family: 'Poppins', sans-serif;
+  color: #444;
+}
+.upi-qr {
+  margin-top: 2rem;
+  width: 250px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(215,110,184,0.3);
+  animation: floatUp 4s ease-in-out infinite;
+}
+.note { margin-top: 1.5rem; font-weight: 500; color: #555; }
+.btn {
+  margin-top: 1rem;
+  background: linear-gradient(to right, #f08a5d, #d76eb8);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.btn:hover { transform: scale(1.05); }
+@keyframes floatUp { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+</style>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Register - Rida & Bloom{% endblock %}
+
+{% block content %}
+<section class="register-section">
+    <h1 class="section-title">Create Your Account 🌸</h1>
+    <p class="section-subtitle">Join the boutique family and start shopping</p>
+
+    <form action="{{ url_for('register') }}" method="POST" class="register-form">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit" class="btn">Register</button>
+    </form>
+
+    <p class="login-link">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+</section>
+
+<style>
+.register-section {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(to right, #fce4ec, #fff0f5);
+    text-align: center;
+}
+.section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.8rem;
+    color: #d581dc;
+    margin-bottom: 0.5rem;
+}
+.section-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+.register-form input {
+    padding: 0.8rem 1rem;
+    border-radius: 25px;
+    border: 1px solid #f08a5d;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+.register-form input:focus { border-color: #d581dc; }
+.btn {
+    background-color: #f08a5d;
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover { background-color: #f9c5bd; color: #fff; }
+.login-link {
+    margin-top: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+}
+.login-link a { color: #d581dc; text-decoration: none; }
+.login-link a:hover { color: #f08a5d; }
+</style>
+{% endblock %}

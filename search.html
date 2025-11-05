@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Search Results - Rida & Bloom{% endblock %}
+{% block content %}
+
+<section class="search-results-section">
+  <h1 class="search-title">Search Results 🔍</h1>
+  <p class="search-subtitle">Showing results for <strong>"{{ query }}"</strong></p>
+
+  {% if results %}
+  <div class="search-grid">
+    {% for product in results %}
+    <div class="search-card">
+      <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+      <h3>{{ product.name }}</h3>
+      <p class="price">₹{{ product.price }}</p>
+      <a href="{{ url_for('product_details', id=product.id) }}" class="btn">View Product</a>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="no-results">
+    <i class="fa-solid fa-face-frown"></i>
+    <p>Oops! No matching products found.</p>
+    <a href="{{ url_for('products') }}" class="btn">Explore Collection</a>
+  </div>
+  {% endif %}
+</section>
+
+<style>
+.search-results-section {
+  padding: 5rem 2rem;
+  background: linear-gradient(to right, #fff8f5, #ffe4f0);
+  text-align: center;
+  min-height: 100vh;
+}
+.search-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.8rem;
+  color: #f08a5d;
+  margin-bottom: 0.5rem;
+}
+.search-subtitle {
+  font-family: 'Poppins', sans-serif;
+  color: #555;
+  margin-bottom: 2rem;
+}
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 2rem;
+}
+.search-card {
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0 5px 20px rgba(240, 138, 93, 0.15);
+  padding: 1rem;
+  transition: 0.3s;
+}
+.search-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(240, 138, 93, 0.25);
+}
+.search-card img {
+  width: 100%;
+  height: 220px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+.search-card h3 {
+  font-family: 'Poppins', sans-serif;
+  margin: 0.8rem 0;
+  color: #333;
+}
+.price {
+  color: #f08a5d;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.btn {
+  display: inline-block;
+  background: #f08a5d;
+  color: #fff;
+  padding: 0.4rem 1rem;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+.btn:hover {
+  background: #d581dc;
+}
+
+/* No Results */
+.no-results {
+  margin-top: 4rem;
+}
+.no-results i {
+  font-size: 3rem;
+  color: #d581dc;
+}
+.no-results p {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 1rem 0;
+}
+</style>
+{% endblock %}

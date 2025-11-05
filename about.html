@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block title %}About - Rida & Bloom{% endblock %}
+
+{% block content %}
+
+<section id="about-us" class="about-section">
+
+  <!-- Floating Sparkles Background -->
+  <div class="sparkle-container">
+    {% for i in range(1, 11) %}
+      <div class="sparkle" style="--i: {{ i }};"></div>
+    {% endfor %}
+  </div>
+
+  <!-- About Content Container -->
+  <div class="about-container">
+    <h1 class="about-title">About Rida & Bloom</h1>
+    <p class="about-text">
+      Rida & Bloom is a boutique brand crafted with love and passion by <strong>Ummehani</strong>.  
+      We curate elegant, stylish, and modest collections for every occasion.
+    </p>
+    <p class="about-text">
+      Our mission is to bring beauty, comfort, and boutique charm directly to your wardrobe.  
+      Every piece is designed to make you feel <strong>special, confident, and timelessly graceful.</strong> 🌸
+    </p>
+
+    <!-- Value Cards -->
+    <div class="value-cards">
+      <div class="card">
+        <h2>💖 Quality</h2>
+        <p>Premium fabrics and meticulous craftsmanship for every collection.</p>
+      </div>
+      <div class="card">
+        <h2>🌸 Elegance</h2>
+        <p>Trendy, stylish designs that make you shine on every occasion.</p>
+      </div>
+      <div class="card">
+        <h2>✨ Passion</h2>
+        <p>We pour love and creativity into every piece we create.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<style>
+html { scroll-behavior: smooth; }
+
+/* ===== Section ===== */
+.about-section {
+  min-height: 100vh;
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* ===== Sparkles ===== */
+.sparkle-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.sparkle {
+  position: absolute;
+  top: -30px;
+  left: calc(var(--i) * 10%);
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, #ffc0cb 0%, #ffb6c1 100%);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: sparkleFall 12s linear infinite;
+  animation-delay: calc(var(--i) * 1s);
+}
+@keyframes sparkleFall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+  50% { opacity: 0.6; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* ===== Container ===== */
+.about-container {
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(12px);
+  border-radius: 30px;
+  padding: 3rem 2rem;
+  max-width: 850px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 10px 40px rgba(240,138,93,0.25);
+  position: relative;
+  z-index: 2;
+  animation: floatUp 1.4s ease-out;
+}
+
+/* ===== Typography ===== */
+.about-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  color: #d581dc;
+  text-shadow: 0 0 15px rgba(255,182,193,0.3);
+  margin-bottom: 1.5rem;
+}
+.about-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* ===== Value Cards ===== */
+.value-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.card {
+  background: rgba(255,240,245,0.95);
+  border-radius: 25px;
+  padding: 2rem 1.5rem;
+  flex: 1 1 200px;
+  max-width: 250px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(240,138,93,0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card h2 {
+  font-family: 'Dancing Script', cursive;
+  color: #d581dc;
+  margin-bottom: 0.8rem;
+}
+.card p {
+  font-family: 'Poppins', sans-serif;
+  color: #555;
+  font-size: 0.95rem;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(240,138,93,0.35);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .about-title { font-size: 2.4rem; }
+  .about-text { font-size: 1rem; }
+  .value-cards { flex-direction: column; gap: 1.2rem; }
+  .card { max-width: 100%; }
+}
+</style>
+
+{% endblock %}

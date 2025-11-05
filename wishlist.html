@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Wishlist - Rida & Bloom{% endblock %}
+
+{% block content %}
+<section class="wishlist-section">
+  <h1 class="section-title">Your Wishlist ♥</h1>
+  <p class="section-subtitle">All your favorite items in one place</p>
+
+  {% if wishlist %}
+  <div class="product-grid">
+    {% for item in wishlist %}
+    <div class="product-card">
+      <img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}">
+      <h3>{{ item.name }}</h3>
+      <p class="price">₹{{ item.price }}</p>
+      <div class="card-buttons">
+        <a href="{{ url_for('add_to_cart', product_id=item.id) }}" class="btn">Add to Cart</a>
+        <a href="{{ url_for('remove_from_wishlist', product_id=item.id) }}" class="btn remove-btn">Remove</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="empty-message">Your wishlist is empty</p>
+  {% endif %}
+</section>
+
+<style>
+.wishlist-section {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: #fff8f5;
+}
+.section-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5rem;
+  color: #d581dc;
+}
+.section-subtitle {
+  font-family: 'Poppins', sans-serif;
+  color: #666;
+  margin-bottom: 2rem;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+.product-card {
+  background: #fff0f5;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 5px 20px rgba(240, 138, 93, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(240, 138, 93, 0.25);
+}
+.product-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 0.8rem;
+}
+.product-card h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  color: #d581dc;
+  margin-bottom: 0.5rem;
+}
+.price {
+  color: #f08a5d;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.btn {
+  text-decoration: none;
+  background-color: #f08a5d;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+.btn:hover { background-color: #f9c5bd; color: #fff; }
+.remove-btn { background-color: #d581dc; }
+.remove-btn:hover { background-color: #f08a5d; }
+.empty-message {
+  font-size: 1.2rem;
+  color: #999;
+  margin-top: 2rem;
+}
+</style>
+{% endblock %}

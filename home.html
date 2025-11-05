@@ -1,0 +1,369 @@
+{% extends "base.html" %}
+{% block title %}Rida & Bloom - Home{% endblock %}
+
+{% block content %}
+
+<!-- ===== SPLASH SCREEN ===== -->
+<div class="splash-screen" id="splash-screen">
+  <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Rida & Bloom Logo" class="splash-logo">
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-home" id="main-home" style="display: none;">
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero-section">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Rida & Bloom Logo" class="hero-logo">
+    <h1>Welcome to Rida & Bloom</h1>
+    <p>Discover elegance, comfort, and charm crafted with love and passion.</p>
+    <a href="{{ url_for('products') }}" class="btn">Shop Now</a>
+  </section>
+
+  <!-- ===== ABOUT PREVIEW SECTION ===== -->
+  <section id="about-preview" class="about-preview-section">
+    <div class="about-container">
+      <div class="about-text">
+        <h2>About Rida & Bloom</h2>
+        <p>
+          At <strong>Rida & Bloom</strong>, we craft every piece with love, grace, and timeless beauty.
+          From soft pastel ridahs to elegant abayas, each design reflects our deep-rooted passion
+          for modest fashion with a touch of modern charm.
+        </p>
+        <a href="{{ url_for('about') }}" class="about-btn">Read More</a>
+      </div>
+      <div class="about-image">
+        <img src="{{ url_for('static', filename='images/about_preview.jpg') }}" alt="Rida & Bloom Boutique">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED PRODUCTS ===== -->
+  <section class="featured-products">
+    <h2>Featured Collection</h2>
+    <div class="product-grid">
+      {% for product in products[:4] %}
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p class="price">₹{{ product.price }}</p>
+        <a href="{{ url_for('product_details', product_id=product.id) }}" class="btn">View Details</a>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- View All Products Button -->
+    <div class="view-all-btn">
+      <a href="{{ url_for('products') }}" class="btn view-all-btn-special">
+        View All Products
+        <span class="btn-icon">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== DISCOVER SECTION ===== -->
+  <section class="about-preview">
+    <h2>Discover Our Story</h2>
+    <p>Every collection is crafted with love, elegance, and a touch of modest beauty.</p>
+    <a href="{{ url_for('about') }}" class="btn">Learn More About Us</a>
+  </section>
+
+</div>
+
+<!-- ===== STYLES ===== -->
+<style>
+/* === GENERAL === */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff8fb;
+  color: #444;
+}
+
+/* === SPLASH SCREEN === */
+.splash-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #fff5fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeOut 2.5s ease forwards;
+  animation-delay: 2.5s;
+}
+.splash-logo {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  box-shadow: 0 0 40px #e7b0c8, 0 0 80px #c90076;
+  animation: bloomPop 2s ease-in-out forwards;
+}
+@keyframes bloomPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes fadeOut {
+  0%, 85% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; display: none; }
+}
+
+/* === MAIN WRAPPER === */
+.main-home {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: #ffd6e8;
+}
+
+/* === HERO SECTION === */
+.hero-section {
+  background: linear-gradient(135deg, #852758, #d83494);
+  padding: 6rem 2rem 5rem 2rem;
+  border-radius: 25px;
+  color: #fff;
+  margin: 3rem auto;
+  max-width: 1100px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(240, 138, 93, 0.25);
+}
+
+.hero-logo {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+  animation: popGlow 1.8s ease-in-out;
+}
+@keyframes popGlow {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.hero-section h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-section p {
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  color: #fffafc;
+}
+
+.hero-section .btn {
+  background: #fff;
+  color: #741b47;
+  padding: 0.9rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+.hero-section .btn:hover {
+  background: #c90076;
+  color: #fff;
+}
+
+/* === ABOUT PREVIEW === */
+.about-preview-section {
+  background: linear-gradient(to right, #fff0f5, #ffe6ef);
+  padding: 5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 1100px;
+}
+.about-text h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.6rem;
+  color: #d581dc;
+  margin-bottom: 1rem;
+}
+.about-text p {
+  font-size: 1.05rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.about-btn {
+  display: inline-block;
+  padding: 0.6rem 1.8rem;
+  border-radius: 25px;
+  background-color: #f08a5d;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.about-btn:hover {
+  background-color: #d581dc;
+  transform: translateY(-3px);
+}
+.about-image img {
+  width: 350px;
+  border-radius: 25px;
+  box-shadow: 0 8px 25px rgba(240,138,93,0.25);
+}
+
+/* === FEATURED PRODUCTS === */
+.featured-products {
+  padding: 4rem 2rem 6rem 2rem;
+  background: #fffafc;
+}
+.featured-products h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.8rem;
+  color: #d581dc;
+  margin-bottom: 2rem;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+.product-card {
+  background: #f8ebf1;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(240, 138, 93, 0.2);
+}
+.product-card img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+}
+.product-card h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: #d581dc;
+}
+.price {
+  color: #a64d79;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.product-card .btn {
+  background-color: #c90076;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+.product-card .btn:hover {
+  background-color: #f8ebf1;
+  color: #c90076;
+}
+
+/* === VIEW ALL BUTTON === */
+.view-all-btn {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+}
+.view-all-btn-special {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #d581dc, #f08a5d);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 6px 15px rgba(213,129,220,0.3);
+  transition: all 0.3s ease;
+}
+.view-all-btn-special:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(213,129,220,0.4);
+}
+.btn-icon { transition: transform 0.3s ease; }
+.view-all-btn-special:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+/* === DISCOVER SECTION === */
+.about-preview {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #fff0f5, #ffe6ef);
+}
+.about-preview h2 {
+  font-family: 'Dancing Script', cursive;
+  color: #d581dc;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.about-preview p {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.about-preview .btn {
+  background: linear-gradient(90deg, #f08a5d, #d581dc);
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.about-preview .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(213,129,220,0.3);
+}
+
+/* === RESPONSIVENESS === */
+@media (max-width: 992px) {
+  .hero-section h1 { font-size: 2.6rem; }
+  .hero-logo { width: 150px; height: 150px; }
+}
+@media (max-width: 768px) {
+  .hero-section h1 { font-size: 2.3rem; }
+  .about-container { flex-direction: column; }
+  .about-image img { width: 85%; }
+}
+@media (max-width: 480px) {
+  .hero-logo { width: 130px; height: 130px; }
+  .hero-section h1 { font-size: 2rem; }
+  .hero-section p { font-size: 1rem; }
+}
+</style>
+
+<!-- === SCRIPT === -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const splash = document.getElementById('splash-screen');
+  const mainHome = document.getElementById('main-home');
+
+  setTimeout(() => {
+    splash.style.display = 'none';
+    mainHome.style.display = 'block';
+  }, 2000);
+});
+</script>
+
+{% endblock %}
